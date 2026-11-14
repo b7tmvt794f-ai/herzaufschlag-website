@@ -1,4 +1,4 @@
-# Lädt die Website bei jeder Änderung auf main per FTPS zu All-Inkl hoch.
+# Lädt die Website bei jeder Änderung auf main per FTPS (lftp) zu All-Inkl hoch.
 # Benötigte Repository-Secrets: FTP_SERVER, FTP_USERNAME, FTP_PASSWORD
 name: Deploy zu All-Inkl
 
@@ -25,19 +25,28 @@ jobs:
         if: env.HAS_FTP == 'true'
         uses: actions/checkout@v4
 
+      - name: lftp installieren
+        if: env.HAS_FTP == 'true'
+        run: sudo apt-get update -qq && sudo apt-get install -y -qq lftp
+
       - name: Per FTPS zu All-Inkl hochladen
         if: env.HAS_FTP == 'true'
-        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
-        with:
-          server: ${{ secrets.FTP_SERVER }}
-          username: ${{ secrets.FTP_USERNAME }}
-          password: ${{ secrets.FTP_PASSWORD }}
-          protocol: ftps
-          local-dir: ./
-          server-dir: ./
-          exclude: |
-            **/.git*
-            **/.git*/**
-            .github/**
-            README.md
-            .nojekyll
+        env:
+          FTP_SERVER: ${{ secrets.FTP_SERVER }}
+          FTP_USERNAME: ${{ secrets.FTP_USERNAME }}
+          LFTP_PASSWORD: ${{ secrets.FTP_PASSWORD }}
+        run: |
+          lftp -c "
+            set ftp:ssl-force true;
+            set ftp:ssl-protect-data true;
+            set ftp:passive-mode true;
+            set ssl:verify-certificate true;
+            set net:max-retries 3;
+            set net:timeout 30;
+            open -u \"$FTP_USERNAME\" --env-password \"$FTP_SERVER\";
+            mirror --reverse --verbose --parallel=2 \
+              --exclude-glob .git* --exclude-glob .git/ --exclude-glob .github/ \
+              --exclude-glob README.md --exclude-glob .nojekyll \
+              ./ ./;
+            bye
+          "
