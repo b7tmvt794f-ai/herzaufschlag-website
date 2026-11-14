@@ -176,7 +176,8 @@
     <!-- MERCH -->
     <section class="view" id="view-merch" aria-labelledby="h-merch">
       <h2 id="h-merch">Merch</h2>
-      <p class="muted">Der Erlös geht an den Verein. Die Vorbestellung startet 2027. Merk dir schon mal, was dir gefällt.</p>
+      <p class="muted">So könnte es aussehen: dezent, praktisch und auch im Alltag gut zu tragen. Der Erlös geht an den Verein. Die Vorbestellung startet 2027, merk dir schon mal, was dir gefällt.</p>
+      <p class="note">Ideen und beispielhafte Gestaltung. Welche Produkte es wirklich gibt, entscheiden wir noch. Preise folgen.</p>
       <div class="grid" id="products"></div>
       <p class="status" id="saved-count" aria-live="polite"></p>
     </section>
@@ -275,8 +276,22 @@
   show();
 
   var products = [
-    ['Padelbälle in der Dose','a'],['Event-Shirt','b'],['Hoodie','a'],['Tasse','b'],
-    ['Cap','a'],['Stoffarmband','b'],['Schläger-Anhänger','a'],['Sticker-Set','b']
+    ['T-Shirts','t-shirts'],
+    ['Hoodies','hoodies'],
+    ['Caps & Visors','caps'],
+    ['Sportsocken','socken'],
+    ['Schweißbänder','schweissbaender'],
+    ['Sporthandtücher','handtuecher'],
+    ['Kühlhandtücher','kuehltuecher'],
+    ['Trinkflaschen','flaschen'],
+    ['Padelbälle & Ballrohr','baelle'],
+    ['Overgrips','overgrips'],
+    ['Taschen & Turnbeutel','taschen'],
+    ['Schläger-Anhänger','schlaeger-anhaenger'],
+    ['Schlüsselanhänger','schluesselanhaenger'],
+    ['Stoffarmbänder','armbaender'],
+    ['Sticker & Bügelpatches','sticker'],
+    ['Kaffeebecher','becher']
   ];
   var saved = {};
   try { saved = JSON.parse(localStorage.getItem('hza-saved') || '{}'); } catch(e) { saved = {}; }
@@ -285,7 +300,7 @@
   products.forEach(function(p, i){
     var el = document.createElement('div');
     el.className = 'product';
-    el.innerHTML = '<div class="img ' + p[1] + '">' + heart + '</div><div class="meta"><span class="name"></span><span class="small muted">Preis folgt</span><button class="save" type="button" id="save-' + i + '"></button></div>';
+    el.innerHTML = '<div class="img photo"><img loading="lazy" width="360" height="360" alt="" src="../assets/merch/' + p[1] + '.jpg"></div><div class="meta"><span class="name"></span><button class="save" type="button" id="save-' + i + '"></button></div>';
     el.querySelector('.name').textContent = p[0];
     var b = el.querySelector('.save');
     function paint(){ var on = !!saved[p[0]]; b.setAttribute('aria-pressed', on); b.textContent = on ? 'Gemerkt' : 'Merken'; }
