@@ -1,0 +1,43 @@
+# Lädt die Website bei jeder Änderung auf main per FTPS zu All-Inkl hoch.
+# Benötigte Repository-Secrets: FTP_SERVER, FTP_USERNAME, FTP_PASSWORD
+name: Deploy zu All-Inkl
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+concurrency:
+  group: deploy-all-inkl
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    env:
+      HAS_FTP: ${{ secrets.FTP_PASSWORD != '' }}
+    steps:
+      - name: Hinweis, falls Zugangsdaten fehlen
+        if: env.HAS_FTP != 'true'
+        run: echo "FTP-Secrets sind noch nicht hinterlegt, Upload wird übersprungen."
+
+      - name: Code holen
+        if: env.HAS_FTP == 'true'
+        uses: actions/checkout@v4
+
+      - name: Per FTPS zu All-Inkl hochladen
+        if: env.HAS_FTP == 'true'
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
+        with:
+          server: ${{ secrets.FTP_SERVER }}
+          username: ${{ secrets.FTP_USERNAME }}
+          password: ${{ secrets.FTP_PASSWORD }}
+          protocol: ftps
+          local-dir: ./
+          server-dir: ./
+          exclude: |
+            **/.git*
+            **/.git*/**
+            .github/**
+            README.md
+            .nojekyll
