@@ -106,3 +106,6 @@ nav.tabs svg{width:24px;height:24px}
 .notice{display:flex;align-items:center;justify-content:center;gap:10px;padding:10px 16px;background:var(--gold-soft);color:var(--ink);font-size:14px;line-height:1.35;text-align:left}
 .notice svg{flex:0 0 22px;width:22px;height:22px}
 .notice b{font-weight:700}
+.venue .addr{display:block;font-size:14px;margin:2px 0 6px}
+.nav-btns{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
+.nav-btns .btn{flex:1 1 auto;text-align:center}
