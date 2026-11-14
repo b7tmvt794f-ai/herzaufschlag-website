@@ -13,6 +13,16 @@
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-title" content="Herzaufschlag">
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Herzaufschlag">
+<meta property="og:title" content="Herzaufschlag Hannover 2027">
+<meta property="og:description" content="Ein Tag, viele Padel-Anlagen, ein Ziel: Wir spielen für den Verein für krebskranke Kinder Hannover. Spenden, mitspielen, dabei sein.">
+<meta property="og:url" content="http://herzaufschlag.de/hannover/">
+<meta property="og:image" content="http://herzaufschlag.de/assets/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:locale" content="de_DE">
+<meta name="twitter:card" content="summary_large_image">
 <link rel="stylesheet" href="../assets/style.css">
 </head>
 <body>
@@ -129,7 +139,7 @@
         <h3>Anlagen und Anfahrt</h3>
         <p class="muted small">Tippen startet die Route ab deinem Standort.</p>
         <div>
-          <div class="venue"><div><b>Post SV</b><p class="muted small">Postsportverein Hannover · angefragt</p><span class="addr muted">Genaue Adresse folgt</span><div class="chips"><span class="chip ex">Familien-Hub</span><span class="chip ex">Americano</span></div>
+          <div class="venue"><div><b>Post SV</b><p class="muted small">Postsportverein Hannover · geplante Event-Zentrale · angefragt</p><span class="addr muted">Genaue Adresse folgt</span><div class="chips"><span class="chip ex">Familien-Hub</span><span class="chip ex">Americano</span></div>
             <div class="nav-btns"><a class="btn btn-sm btn-ghost" target="_blank" rel="noopener" href="https://www.google.com/maps/dir/?api=1&amp;destination=Post%20SV%20Hannover%20Padel">Google Maps</a><a class="btn btn-sm btn-ghost" target="_blank" rel="noopener" href="https://maps.apple.com/?daddr=Post%20SV%20Hannover%20Padel">Apple Karten</a><a class="btn btn-sm btn-ghost" target="_blank" rel="noopener" href="https://www.google.com/maps/dir/?api=1&amp;destination=Post%20SV%20Hannover%20Padel&amp;travelmode=transit">Bus &amp; Bahn</a></div></div></div>
           <div class="venue"><div><b>The Padel Club Hannover</b><p class="muted small">Isernhagen · angefragt</p><span class="addr">Berliner Str. 5, 30916 Isernhagen</span><div class="chips"><span class="chip ex">Firmen-Cup</span></div>
             <div class="nav-btns"><a class="btn btn-sm btn-ghost" target="_blank" rel="noopener" href="https://www.google.com/maps/dir/?api=1&amp;destination=Berliner%20Str.%205%2C%2030916%20Isernhagen">Google Maps</a><a class="btn btn-sm btn-ghost" target="_blank" rel="noopener" href="https://maps.apple.com/?daddr=Berliner%20Str.%205%2C%2030916%20Isernhagen">Apple Karten</a><a class="btn btn-sm btn-ghost" target="_blank" rel="noopener" href="https://www.google.com/maps/dir/?api=1&amp;destination=Berliner%20Str.%205%2C%2030916%20Isernhagen&amp;travelmode=transit">Bus &amp; Bahn</a></div></div></div>
@@ -188,7 +198,7 @@
           <div><label for="n-mail">E-Mail</label><input id="n-mail" type="email" autocomplete="email" required></div>
           <div><label for="n-role">Ich möchte</label>
             <select id="n-role"><option>mitspielen</option><option>helfen</option><option>als Firma ein Team stellen</option><option>eine Anlage oder Station beisteuern</option></select></div>
-          <button class="btn btn-primary" type="submit">Eintragen</button>
+          <button class="btn btn-primary" type="submit">Per Mail eintragen</button>
           <p class="status" id="notify-status" aria-live="polite"></p>
         </form>
       </div>
@@ -286,7 +296,10 @@
 
   document.getElementById('notify').addEventListener('submit', function(e){
     e.preventDefault();
-    document.getElementById('notify-status').textContent = 'Danke! Das Formular ist im Entwurf noch nicht angeschlossen, es wurde nichts gespeichert.';
+    var n=document.getElementById('n-name').value.trim(), m=document.getElementById('n-mail').value.trim(), r=document.getElementById('n-role').value;
+    var body='Hallo Herzaufschlag-Team,\n\nich möchte '+r+'.\n\nName: '+n+'\nE-Mail: '+m+'\n\nBitte meldet euch, wenn es losgeht.';
+    window.location.href='mailto:info@herzaufschlag.de?subject='+encodeURIComponent('Herzaufschlag: Ich möchte '+r)+'&body='+encodeURIComponent(body);
+    document.getElementById('notify-status').textContent='Dein Mail-Programm öffnet sich mit einer fertigen Nachricht. Einfach absenden, fertig.';
   });
 })();
 </script>
