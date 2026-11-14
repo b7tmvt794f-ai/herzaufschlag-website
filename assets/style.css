@@ -209,3 +209,9 @@ header.top{flex-wrap:wrap}
 .social.icons a{width:44px;height:44px;padding:0;justify-content:center;border-radius:50%}
 .social.icons a:hover{border-color:var(--heart);color:var(--heart)}
 .social.icons svg{width:22px;height:22px}
+.challenges{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
+.challenges div{background:var(--surface);border-radius:14px;padding:12px;display:flex;flex-direction:column;gap:3px}
+.challenges span{font-size:22px}
+.challenges b{font-size:14px}
+.challenges small{font-size:12.5px;color:var(--muted);line-height:1.35}
+@media (min-width:760px){.challenges{grid-template-columns:repeat(3,1fr)}}
