@@ -36,3 +36,14 @@
     document.body.appendChild(h); setTimeout(function(){ h.remove(); }, 750);
   }, { passive: true });
 })();
+/* Social-Symbole: Kanäle folgen noch */
+(function(){
+  var t=document.getElementById('toast'), timer;
+  document.querySelectorAll('[data-soon]').forEach(function(a){
+    a.addEventListener('click',function(e){
+      e.preventDefault(); if(!t) return;
+      t.textContent = a.getAttribute('data-soon') + ' folgt bald. Wir sind noch beim Aufwärmen 🎾';
+      t.classList.add('show'); clearTimeout(timer); timer=setTimeout(function(){ t.classList.remove('show'); }, 2200);
+    });
+  });
+})();

@@ -193,3 +193,15 @@ html[data-dir="back"]::view-transition-new(page){animation-name:vtInBack}
 .impact{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
 .impact div{background:var(--surface);border-radius:14px;padding:12px;display:flex;flex-direction:column;gap:4px;text-align:center}
 .impact b{font-family:var(--display);font-size:20px;color:var(--heart)}
+/* Social-Symbole im Header */
+header.top{flex-wrap:wrap}
+.social-top{display:flex;gap:2px;margin-left:auto;margin-right:4px}
+.social-top a{display:flex;align-items:center;justify-content:center;width:34px;height:34px;border-radius:50%;color:var(--ink);opacity:.8}
+.social-top a:hover{opacity:1;background:var(--heart-soft);color:var(--heart)}
+.social-top svg{width:20px;height:20px}
+@media (max-width:440px){
+  .social-top{order:3;width:100%;justify-content:center;margin:2px 0 -4px;gap:10px}
+  .social-top a{width:32px;height:30px}
+}
+.toast{position:fixed;left:50%;bottom:96px;transform:translate(-50%,20px);background:var(--ink);color:var(--bg);padding:10px 16px;border-radius:999px;font-size:14px;font-weight:600;opacity:0;pointer-events:none;transition:opacity .2s,transform .2s;z-index:60;white-space:nowrap}
+.toast.show{opacity:1;transform:translate(-50%,0)}
