@@ -177,3 +177,19 @@ html[data-dir="back"]::view-transition-new(page){animation-name:vtInBack}
 @keyframes vtIn{from{opacity:0;transform:translateX(24px)}}
 @keyframes vtOutBack{to{opacity:0;transform:translateX(24px)}}
 @keyframes vtInBack{from{opacity:0;transform:translateX(-24px)}}
+/* Partner-Seite */
+.back{font-weight:600;color:var(--heart);text-decoration:none;align-self:flex-start}
+.test-note{border:1.5px dashed var(--gold)}
+.partner-hero{padding:0;overflow:hidden}
+.partner-hero>p{padding:0 16px 16px;margin:0}
+.photo-ph{aspect-ratio:16/9;background:linear-gradient(135deg,var(--heart-soft),var(--gold-soft));display:flex;align-items:center;justify-content:center;text-align:center;color:var(--muted);font-weight:600}
+.partner-head{display:flex;align-items:center;gap:14px;padding:16px 16px 0}
+.partner-head h2{margin:0;font-size:22px;line-height:1.2}
+.logo-ph{flex:0 0 64px;height:64px;border-radius:14px;border:1.5px dashed var(--muted);display:flex;align-items:center;justify-content:center;text-align:center;font-size:11px;font-weight:700;color:var(--muted);line-height:1.2;background:var(--surface)}
+.qa{border-top:1px solid var(--line);padding-top:10px}
+.qa .q{font-weight:700;margin:0 0 4px}
+.qa .a{margin:0}
+.ph-text{color:var(--muted);font-style:italic;font-size:14px}
+.impact{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.impact div{background:var(--surface);border-radius:14px;padding:12px;display:flex;flex-direction:column;gap:4px;text-align:center}
+.impact b{font-family:var(--display);font-size:20px;color:var(--heart)}

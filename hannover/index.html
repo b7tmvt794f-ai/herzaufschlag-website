@@ -24,7 +24,7 @@
 <meta property="og:image:height" content="630">
 <meta property="og:locale" content="de_DE">
 <meta name="twitter:card" content="summary_large_image">
-<link rel="stylesheet" href="../assets/style.css?v=202611142340">
+<link rel="stylesheet" href="../assets/style.css?v=202611150005">
 </head>
 <body>
 <div class="app with-tabs">
@@ -101,7 +101,10 @@
       <div class="card accent">
         <h2>Wofür wir spielen</h2>
         <p>Der Verein für krebskranke Kinder Hannover e.V. wurde 1984 von betroffenen Eltern gegründet und unterstützt die Kinderkrebsstation der MHH und die Familien. Er arbeitet ehrenamtlich und lebt nur von Spenden.</p>
-        <a class="btn btn-primary" href="#spenden" style="align-self:flex-start">So kannst du helfen</a>
+        <div class="actions left">
+          <a class="btn btn-primary" href="#partner">Mehr über den Verein</a>
+          <a class="btn btn-ghost" href="#spenden">So kannst du helfen</a>
+        </div>
       </div>
 
       <div class="card wide follow">
@@ -180,6 +183,53 @@
     </section>
 
     <!-- MERCH -->
+    <!-- PARTNER (Testversion) -->
+    <section class="view" id="view-partner" aria-labelledby="h-partner">
+      <a class="back" href="#start">← Zurück</a>
+      <p class="note test-note"><b>Testversion.</b> Logo, Fotos und Antworten kommen erst nach Absprache und Freigabe durch den Verein.</p>
+      <div class="partner-hero card wide">
+        <div class="photo-ph"><span>Foto vom Verein oder der Station<br><small>nach Freigabe</small></span></div>
+        <div class="partner-head">
+          <div class="logo-ph">Logo<br>Verein</div>
+          <div><p class="tagline" style="text-align:left">Unser Partner</p>
+          <h2 id="h-partner">Verein für krebskranke Kinder Hannover e.V.</h2></div>
+        </div>
+        <p>Für ihn spielen wir. Der Verein wurde 1984 von betroffenen Eltern gegründet, arbeitet ehrenamtlich und finanziert sich ausschließlich über Spenden. Er unterstützt die Kinderkrebsstation der Medizinischen Hochschule Hannover und die Familien der Kinder.</p>
+      </div>
+      <div class="card gold">
+        <h3>Was der Verein schon möglich gemacht hat</h3>
+        <ul class="list">
+          <li class="row"><span class="dot">♥</span><div><b>Hilfe für Familien</b><p class="muted small">Unterstützung im seelischen und sozialen Bereich während der Behandlung.</p></div></li>
+          <li class="row"><span class="dot">🏃</span><div><b>Sport trotz Therapie</b><p class="muted small">Ein geschützter, kindgerechter Sportraum an der MHH und ein Sportprogramm für die jungen Patientinnen und Patienten.</p></div></li>
+          <li class="row"><span class="dot">🏠</span><div><b>Brückenteam</b><p class="muted small">Begleitung beim Übergang von der Klinik nach Hause.</p></div></li>
+        </ul>
+        <p class="note">Quelle: Angaben der MHH und des Vereins. Texte stimmen wir vor Veröffentlichung mit dem Verein ab.</p>
+      </div>
+      <div class="card">
+        <h3>Im Gespräch</h3>
+        <p class="small muted">Interview mit dem Verein. Gesprächspartner folgt.</p>
+          <div class="qa"><p class="q">Was macht der Verein, und wie ist er entstanden?</p><p class="a ph-text">Antwort folgt nach dem Gespräch mit dem Verein.</p></div>
+          <div class="qa"><p class="q">Wie sieht ein typischer Tag auf der Kinderkrebsstation aus, und wo hilft der Verein konkret?</p><p class="a ph-text">Antwort folgt nach dem Gespräch mit dem Verein.</p></div>
+          <div class="qa"><p class="q">Was brauchen Familien in dieser Zeit am dringendsten?</p><p class="a ph-text">Antwort folgt nach dem Gespräch mit dem Verein.</p></div>
+          <div class="qa"><p class="q">Wofür wird das Geld aus Herzaufschlag eingesetzt?</p><p class="a ph-text">Antwort folgt nach dem Gespräch mit dem Verein.</p></div>
+          <div class="qa"><p class="q">Was bedeutet euch so ein Event aus der Padel-Community?</p><p class="a ph-text">Antwort folgt nach dem Gespräch mit dem Verein.</p></div>
+          <div class="qa"><p class="q">Wie kann man über den Eventtag hinaus helfen?</p><p class="a ph-text">Antwort folgt nach dem Gespräch mit dem Verein.</p></div>
+      </div>
+      <div class="card accent">
+        <h3>Wofür euer Geld konkret ist</h3>
+        <div class="impact">
+          <div><b>50 €</b><span class="ph-text">Beispiel folgt</span></div>
+          <div><b>250 €</b><span class="ph-text">Beispiel folgt</span></div>
+          <div><b>1.000 €</b><span class="ph-text">Beispiel folgt</span></div>
+        </div>
+        <p class="note">Die Beispiele legen wir gemeinsam mit dem Verein fest.</p>
+      </div>
+      <div class="actions left">
+        <a class="btn btn-primary" href="https://www.verein-fuer-krebskranke-kinder-hannover.de/" target="_blank" rel="noopener">Zur Website des Vereins</a>
+        <a class="btn btn-ghost" href="#spenden">Spenden</a>
+      </div>
+    </section>
+
     <section class="view" id="view-merch" aria-labelledby="h-merch">
       <h2 id="h-merch">Merch</h2>
       <p class="muted">So könnte es aussehen: dezent, praktisch und auch im Alltag gut zu tragen. Der Erlös geht an den Verein. Die Vorbestellung startet 2027, merk dir schon mal, was dir gefällt.</p>
@@ -266,7 +316,7 @@
 
 <script>
 (function(){
-  var views = ['start','spenden','programm','merch','mitmachen'];
+  var views = ['start','spenden','programm','merch','mitmachen','partner'];
   function show(){
     var v = (location.hash || '#start').slice(1);
     if (views.indexOf(v) < 0) v = 'start';
