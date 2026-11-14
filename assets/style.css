@@ -41,9 +41,9 @@ a{color:var(--heart)}
 .muted{color:var(--muted)}
 .small{font-size:14px}
 .hero{display:flex;flex-direction:column;align-items:center;text-align:center;gap:14px;padding:8px 0 4px}
-.logo{position:relative;width:300px;height:190px}
-.logo svg{position:absolute;left:75px;top:0}
-.logo .word{position:absolute;left:0;right:0;top:112px;font-family:var(--display);font-weight:700;font-size:44px;letter-spacing:-1px;line-height:1;color:var(--ink);
+.logo{position:relative;width:320px;height:185px;cursor:pointer}
+.logo svg{position:absolute;left:62px;top:0;width:196px;height:172px}
+.logo .word{position:absolute;left:0;right:0;top:92px;font-family:var(--display);font-weight:700;font-size:44px;letter-spacing:-1px;line-height:1;color:var(--ink);
   text-shadow:3px 0 0 var(--bg),-3px 0 0 var(--bg),0 3px 0 var(--bg),0 -3px 0 var(--bg),2px 2px 0 var(--bg),-2px 2px 0 var(--bg),2px -2px 0 var(--bg),-2px -2px 0 var(--bg)}
 .tagline{font-size:13px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;color:var(--muted)}
 .actions{display:flex;gap:10px;flex-wrap:wrap;justify-content:center}
@@ -148,3 +148,32 @@ button.chip.pick[aria-pressed="true"]::before{content:"✓ "}
 textarea{width:100%;border-radius:12px;border:1.5px solid var(--line);background:var(--bg);color:var(--ink);padding:10px 12px;font:16px var(--body);resize:vertical;box-sizing:border-box}
 .product .img.photo{background:#F7EFE6;padding:0}
 .product .img.photo img{width:100%;height:100%;object-fit:cover;display:block}
+/* Logo-Intro */
+.logo .mark{overflow:visible}
+.logo .hz-ball,.logo .hz-heart{transform-box:fill-box;transform-origin:center}
+.logo.intro .hz-ball{animation:ballIn .75s cubic-bezier(.2,.8,.25,1.15) both}
+.logo.intro .hz-heart{animation:beat .5s ease-out .7s both}
+@keyframes ballIn{0%{transform:translate(140px,-120px) scale(.35);opacity:0}60%{opacity:1}100%{transform:none;opacity:1}}
+@keyframes beat{0%{transform:scale(1)}35%{transform:scale(1.09)}60%{transform:scale(.98)}100%{transform:scale(1)}}
+/* Spenden-Herz */
+.barometer{display:flex;align-items:center;gap:16px}
+.barometer svg{width:96px;height:90px;flex:0 0 96px;overflow:visible}
+.bm-bg{fill:var(--bg)}
+.bm-fill{fill:var(--heart);transition:y .9s cubic-bezier(.3,.7,.2,1)}
+.bm-text{display:flex;flex-direction:column;gap:4px}
+.bm-pct{font-family:var(--display);font-size:22px;color:var(--heart)}
+/* Herz beim Antippen */
+.tap-heart{position:fixed;z-index:50;pointer-events:none;transform:translate(-50%,-50%);animation:tapHeart .7s ease-out forwards}
+@keyframes tapHeart{0%{transform:translate(-50%,-50%) scale(.3);opacity:.95}50%{transform:translate(-50%,-80%) scale(1.1);opacity:.9}100%{transform:translate(-50%,-140%) scale(.9);opacity:0}}
+/* App-Übergänge zwischen den Tabs */
+header.top{view-transition-name:topbar}
+nav.tabs{view-transition-name:tabs}
+.app.with-tabs main{view-transition-name:page}
+::view-transition-old(page){animation:vtOut .18s ease-in both}
+::view-transition-new(page){animation:vtIn .24s ease-out both}
+html[data-dir="back"]::view-transition-old(page){animation-name:vtOutBack}
+html[data-dir="back"]::view-transition-new(page){animation-name:vtInBack}
+@keyframes vtOut{to{opacity:0;transform:translateX(-24px)}}
+@keyframes vtIn{from{opacity:0;transform:translateX(24px)}}
+@keyframes vtOutBack{to{opacity:0;transform:translateX(24px)}}
+@keyframes vtInBack{from{opacity:0;transform:translateX(-24px)}}
