@@ -204,9 +204,14 @@
       </div>
       <div class="card" id="card-helfen">
         <h3>🤝 Helfen</h3>
-        <p class="small">Ohne Helfer kein Eventtag. Schon zwei Stunden machen einen Unterschied.</p>
-        <div class="chips"><span class="chip">Stand betreuen</span><span class="chip">Auf- und Abbau</span><span class="chip">Fotos und Videos</span><span class="chip">Kuchen backen</span><span class="chip">Kids-Stationen</span><span class="chip">Turnierleitung</span></div>
-        <a class="btn btn-primary btn-sm" href="mailto:info@herzaufschlag.de?subject=Ich%20helfe%20mit%20bei%20Herzaufschlag">Ich helfe mit</a>
+        <p class="small">Ohne Helfer kein Eventtag. Schon zwei Stunden machen einen Unterschied. Tipp an, was dir liegt, gern auch mehreres.</p>
+        <form class="form" id="help-form">
+          <div class="chips" role="group" aria-label="Wobei möchtest du helfen?"><button type="button" class="chip pick" aria-pressed="false">Stand betreuen</button><button type="button" class="chip pick" aria-pressed="false">Auf- und Abbau</button><button type="button" class="chip pick" aria-pressed="false">Fotos und Videos</button><button type="button" class="chip pick" aria-pressed="false">Kuchen backen</button><button type="button" class="chip pick" aria-pressed="false">Kids-Stationen</button><button type="button" class="chip pick" aria-pressed="false">Turnierleitung</button></div>
+          <div><label for="h-other">Sonstiges oder Anmerkung</label><textarea id="h-other" rows="2" placeholder="z. B. Ich habe einen Anhänger, kann Musik machen, nur vormittags …"></textarea></div>
+          <div><label for="h-name">Dein Name</label><input id="h-name" autocomplete="name"></div>
+          <button class="btn btn-primary" type="submit">Ich helfe mit</button>
+          <p class="status" id="help-status" aria-live="polite"></p>
+        </form>
       </div>
       <div class="card gold" id="card-fan">
         <h3>📣 Fan sein</h3>
@@ -313,6 +318,30 @@ document.querySelectorAll('.path[data-target]').forEach(function(b){b.addEventLi
   c.scrollIntoView({behavior:'smooth',block:'start'});
   c.classList.remove('flash'); void c.offsetWidth; c.classList.add('flash');
 });});
+</script>
+<script>
+(function(){
+  var tiles=document.querySelectorAll('.path[data-target]');
+  function select(id){
+    tiles.forEach(function(t){var on=t.getAttribute('data-target')===id;t.classList.toggle('active',on);t.setAttribute('aria-pressed',on);});
+    ['card-mitspielen','card-helfen','card-fan'].forEach(function(c){var el=document.getElementById(c);if(el)el.classList.toggle('selected',c===id);});
+  }
+  tiles.forEach(function(b){b.addEventListener('click',function(){select(b.getAttribute('data-target'));});});
+  document.querySelectorAll('.chip.pick').forEach(function(c){c.addEventListener('click',function(){
+    c.setAttribute('aria-pressed', c.getAttribute('aria-pressed')!=='true'); select('card-helfen');});});
+  var f=document.getElementById('help-form'); if(!f) return;
+  f.addEventListener('submit',function(e){
+    e.preventDefault();
+    var picks=[].map.call(document.querySelectorAll('.chip.pick[aria-pressed="true"]'),function(c){return '- '+c.textContent;});
+    var other=document.getElementById('h-other').value.trim(), name=document.getElementById('h-name').value.trim();
+    var body='Hallo Herzaufschlag-Team,\n\nich möchte beim Eventtag helfen.\n\n'
+      +(picks.length?'Am liebsten bei:\n'+picks.join('\n')+'\n\n':'')
+      +(other?'Sonstiges / Anmerkung:\n'+other+'\n\n':'')
+      +'Viele Grüße'+(name?'\n'+name:'');
+    window.location.href='mailto:info@herzaufschlag.de?subject='+encodeURIComponent('Ich helfe mit bei Herzaufschlag'+(name?' – '+name:''))+'&body='+encodeURIComponent(body);
+    document.getElementById('help-status').textContent='Dein Mail-Programm öffnet sich mit deiner Auswahl. Einfach absenden, danke!';
+  });
+})();
 </script>
 </body>
 </html>

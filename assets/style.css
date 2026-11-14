@@ -140,3 +140,9 @@ button.path:hover{border-color:var(--heart)}
 #card-mitspielen,#card-helfen,#card-fan{scroll-margin-top:72px}
 .card.flash{animation:flash 1.2s ease-out}
 @keyframes flash{0%{box-shadow:0 0 0 3px var(--heart)}100%{box-shadow:0 0 0 0 transparent}}
+button.path.active{border:2px solid var(--heart);background:var(--heart-soft)}
+.card.selected{border:2px solid var(--heart)}
+button.chip.pick{font:inherit;font-size:13px;font-weight:500;cursor:pointer;-webkit-tap-highlight-color:transparent;padding:7px 12px}
+button.chip.pick[aria-pressed="true"]{background:var(--heart);border-color:var(--heart);color:#fff}
+button.chip.pick[aria-pressed="true"]::before{content:"✓ "}
+textarea{width:100%;border-radius:12px;border:1.5px solid var(--line);background:var(--bg);color:var(--ink);padding:10px 12px;font:16px var(--body);resize:vertical;box-sizing:border-box}
