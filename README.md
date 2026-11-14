@@ -17,3 +17,6 @@ Ordner `hannover/` kopieren, umbenennen (z. B. `koeln/`), Inhalte anpassen und a
 - Instagram-Account @herzaufschlag anlegen
 - Anmeldeformular an einen Dienst anschließen
 - Eigene Domain herzaufschlag.de verbinden
+
+## Veröffentlichung
+Jede Änderung auf `main` wird automatisch per FTPS zu All-Inkl hochgeladen (siehe `.github/workflows/deploy-all-inkl.yml`) und ist danach unter herzaufschlag.de erreichbar.
