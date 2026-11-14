@@ -118,3 +118,16 @@ nav.tabs svg{width:24px;height:24px}
 .path .dot{font-size:18px}
 .path b{font-size:14px}
 .path small{font-size:11.5px;color:var(--muted);line-height:1.3}
+/* Tablet und Desktop: breiter, Karten nebeneinander. Handy bleibt unverändert. */
+@media (min-width:760px){
+  .app{max-width:920px}
+  nav.tabs ul{max-width:920px}
+  section.view.active,.page{display:grid;grid-template-columns:1fr 1fr;gap:20px;align-items:start;padding:28px 24px}
+  section.view>*,.page>*{grid-column:1/-1}
+  section.view>.card,.page>.card{grid-column:auto}
+  section.view>.card.wide{grid-column:1/-1}
+  .stories{justify-content:center;flex-wrap:wrap;overflow:visible}
+  .story{width:96px}
+  .grid{grid-template-columns:repeat(4,1fr)}
+  .hero .muted{max-width:60ch}
+}
