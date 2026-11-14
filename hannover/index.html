@@ -186,11 +186,11 @@
       <h2 id="h-mitmachen">Mitmachen</h2>
       <p class="muted">Drei Wege, dabei zu sein. Such dir einen aus, oder alle drei.</p>
       <div class="paths">
-        <div class="path"><span class="dot">🎾</span><b>Mitspielen</b><small>Turnier, Firmen-Cup, Bring a Beginner</small></div>
-        <div class="path"><span class="dot">🤝</span><b>Helfen</b><small>Stand, Aufbau, Fotos, Kuchen</small></div>
-        <div class="path"><span class="dot">📣</span><b>Fan sein</b><small>Zuschauen, anfeuern, weitersagen</small></div>
+        <button type="button" class="path" data-target="card-mitspielen"><span class="dot">🎾</span><b>Mitspielen</b><small>Turnier, Firmen-Cup, Bring a Beginner</small></button>
+        <button type="button" class="path" data-target="card-helfen"><span class="dot">🤝</span><b>Helfen</b><small>Stand, Aufbau, Fotos, Kuchen</small></button>
+        <button type="button" class="path" data-target="card-fan"><span class="dot">📣</span><b>Fan sein</b><small>Zuschauen, anfeuern, weitersagen</small></button>
       </div>
-      <div class="card">
+      <div class="card" id="card-mitspielen">
         <h3>🎾 Mitspielen</h3>
         <p class="small muted">Die Anmeldung öffnet im Sommer 2027. Trag dich ein, dann melden wir uns.</p>
         <form class="form" id="notify">
@@ -202,13 +202,13 @@
           <p class="status" id="notify-status" aria-live="polite"></p>
         </form>
       </div>
-      <div class="card">
+      <div class="card" id="card-helfen">
         <h3>🤝 Helfen</h3>
         <p class="small">Ohne Helfer kein Eventtag. Schon zwei Stunden machen einen Unterschied.</p>
         <div class="chips"><span class="chip">Stand betreuen</span><span class="chip">Auf- und Abbau</span><span class="chip">Fotos und Videos</span><span class="chip">Kuchen backen</span><span class="chip">Kids-Stationen</span><span class="chip">Turnierleitung</span></div>
         <a class="btn btn-primary btn-sm" href="mailto:info@herzaufschlag.de?subject=Ich%20helfe%20mit%20bei%20Herzaufschlag">Ich helfe mit</a>
       </div>
-      <div class="card gold">
+      <div class="card gold" id="card-fan">
         <h3>📣 Fan sein</h3>
         <p class="small">Komm vorbei, feuer an und bring Familie und Freunde mit. Für die Kids gibt es den Familien-Hub. Und bis dahin hilft es schon, wenn du uns folgst und es weitersagst.</p>
         <div class="nav-btns">
@@ -306,6 +306,13 @@
 <script>
 (function(){var b=document.getElementById('share-btn');if(!b||!navigator.share)return;
 b.addEventListener('click',function(e){e.preventDefault();navigator.share({title:'Herzaufschlag',text:'Charity Padel in Hannover für krebskranke Kinder. Sei dabei!',url:'https://herzaufschlag.de/hannover/'}).catch(function(){});});})();
+</script>
+<script>
+document.querySelectorAll('.path[data-target]').forEach(function(b){b.addEventListener('click',function(){
+  var c=document.getElementById(b.getAttribute('data-target')); if(!c) return;
+  c.scrollIntoView({behavior:'smooth',block:'start'});
+  c.classList.remove('flash'); void c.offsetWidth; c.classList.add('flash');
+});});
 </script>
 </body>
 </html>
