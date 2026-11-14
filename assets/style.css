@@ -113,3 +113,8 @@ nav.tabs svg{width:24px;height:24px}
 .patron{display:flex;flex-direction:column;align-items:center;gap:6px;text-align:center}
 .patron .ring{background:none;border:2px dashed var(--muted);padding:2px}
 .patron .ring span{font-size:22px;font-weight:700;color:var(--muted)}
+.paths{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:4px 0 16px}
+.path{display:flex;flex-direction:column;align-items:center;text-align:center;gap:4px;padding:12px 6px;border-radius:16px;background:var(--surface);border:1px solid var(--line)}
+.path .dot{font-size:18px}
+.path b{font-size:14px}
+.path small{font-size:11.5px;color:var(--muted);line-height:1.3}

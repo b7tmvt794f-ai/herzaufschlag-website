@@ -38,7 +38,7 @@
         <p class="muted">Ein Tag, viele Padel-Anlagen, ein Ziel: Wir spielen für den Verein für krebskranke Kinder Hannover. Für alle Spielstärken, mit Programm für Familien.</p>
         <div class="actions">
           <a class="btn btn-primary" href="#spenden">Jetzt spenden</a>
-          <a class="btn btn-ghost" href="#mitmachen">Mitspielen</a>
+          <a class="btn btn-ghost" href="#mitmachen">Mitmachen</a>
         </div>
       </div>
 
@@ -174,8 +174,14 @@
     <!-- MITMACHEN -->
     <section class="view" id="view-mitmachen" aria-labelledby="h-mitmachen">
       <h2 id="h-mitmachen">Mitmachen</h2>
+      <p class="muted">Drei Wege, dabei zu sein. Such dir einen aus, oder alle drei.</p>
+      <div class="paths">
+        <div class="path"><span class="dot">🎾</span><b>Mitspielen</b><small>Turnier, Firmen-Cup, Bring a Beginner</small></div>
+        <div class="path"><span class="dot">🤝</span><b>Helfen</b><small>Stand, Aufbau, Fotos, Kuchen</small></div>
+        <div class="path"><span class="dot">📣</span><b>Fan sein</b><small>Zuschauen, anfeuern, weitersagen</small></div>
+      </div>
       <div class="card">
-        <h3>Mitspielen</h3>
+        <h3>🎾 Mitspielen</h3>
         <p class="small muted">Die Anmeldung öffnet im Sommer 2027. Trag dich ein, dann melden wir uns.</p>
         <form class="form" id="notify">
           <div><label for="n-name">Name</label><input id="n-name" autocomplete="name"></div>
@@ -185,6 +191,21 @@
           <button class="btn btn-primary" type="submit">Eintragen</button>
           <p class="status" id="notify-status" aria-live="polite"></p>
         </form>
+      </div>
+      <div class="card">
+        <h3>🤝 Helfen</h3>
+        <p class="small">Ohne Helfer kein Eventtag. Schon zwei Stunden machen einen Unterschied.</p>
+        <div class="chips"><span class="chip">Stand betreuen</span><span class="chip">Auf- und Abbau</span><span class="chip">Fotos und Videos</span><span class="chip">Kuchen backen</span><span class="chip">Kids-Stationen</span><span class="chip">Turnierleitung</span></div>
+        <a class="btn btn-primary btn-sm" href="mailto:info@herzaufschlag.de?subject=Ich%20helfe%20mit%20bei%20Herzaufschlag">Ich helfe mit</a>
+      </div>
+      <div class="card gold">
+        <h3>📣 Fan sein</h3>
+        <p class="small">Komm vorbei, feuer an und bring Familie und Freunde mit. Für die Kids gibt es den Familien-Hub. Und bis dahin hilft es schon, wenn du uns folgst und es weitersagst.</p>
+        <div class="nav-btns">
+          <a class="btn btn-sm btn-primary" href="https://www.instagram.com/herzaufschlag/" rel="noopener" target="_blank">Folge @herzaufschlag</a>
+          <a class="btn btn-sm btn-ghost" id="share-btn" href="https://wa.me/?text=Herzaufschlag%20%E2%80%93%20Charity%20Padel%20in%20Hannover%20f%C3%BCr%20krebskranke%20Kinder.%20Sei%20dabei%3A%20https%3A//herzaufschlag.de/hannover/" rel="noopener" target="_blank">Weitersagen</a>
+        </div>
+        <p class="note">Sobald das Datum steht, kannst du es hier direkt in deinen Kalender übernehmen.</p>
       </div>
       <div class="card">
         <h3>Sponsor werden</h3>
@@ -268,6 +289,10 @@
     document.getElementById('notify-status').textContent = 'Danke! Das Formular ist im Entwurf noch nicht angeschlossen, es wurde nichts gespeichert.';
   });
 })();
+</script>
+<script>
+(function(){var b=document.getElementById('share-btn');if(!b||!navigator.share)return;
+b.addEventListener('click',function(e){e.preventDefault();navigator.share({title:'Herzaufschlag',text:'Charity Padel in Hannover für krebskranke Kinder. Sei dabei!',url:'https://herzaufschlag.de/hannover/'}).catch(function(){});});})();
 </script>
 </body>
 </html>
