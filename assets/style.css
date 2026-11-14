@@ -133,3 +133,4 @@ nav.tabs svg{width:24px;height:24px}
   .grid{grid-template-columns:repeat(4,1fr)}
   .hero .muted{max-width:60ch}
 }
+.btn-disabled{opacity:.45;cursor:not-allowed;pointer-events:none}
