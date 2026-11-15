@@ -24,7 +24,7 @@
 <meta property="og:image:height" content="630">
 <meta property="og:locale" content="de_DE">
 <meta name="twitter:card" content="summary_large_image">
-<link rel="stylesheet" href="../assets/style.css?v=202611151048">
+<link rel="stylesheet" href="../assets/style.css?v=202611151154">
 </head>
 <body>
 <div class="app with-tabs">
@@ -322,10 +322,11 @@
     <!-- MITMACHEN -->
     <section class="view" id="view-mitmachen" aria-labelledby="h-mitmachen">
       <h2 id="h-mitmachen">Mitmachen</h2>
-      <p class="muted">Drei Wege, dabei zu sein. Such dir einen aus, oder alle drei.</p>
+      <p class="muted">Vier Wege, dabei zu sein. Such dir einen aus, oder gleich mehrere.</p>
       <div class="paths">
         <button type="button" class="path" data-target="card-mitspielen"><span class="dot">🎾</span><b>Mitspielen</b><small>Turnier, Firmen- &amp; Vereins-Cup, Bring a Beginner</small></button>
         <button type="button" class="path" data-target="card-helfen"><span class="dot">🤝</span><b>Helfen</b><small>Stand, Aufbau, Fotos, Kuchen</small></button>
+        <button type="button" class="path" data-target="card-sach"><span class="dot">🎁</span><b>Sachspende</b><small>Tombola-Preis, Getränke, Essen</small></button>
         <button type="button" class="path" data-target="card-fan"><span class="dot">📣</span><b>Fan sein</b><small>Zuschauen, anfeuern, weitersagen</small></button>
       </div>
       <div class="card" id="card-mitspielen">
@@ -351,6 +352,18 @@
           <button class="btn btn-primary" type="submit">Ich helfe mit</button>
           <p class="status" id="help-status" aria-live="polite"></p>
         </form>
+      </div>
+      <div class="card" id="card-sach">
+        <h3>🎁 Sachspende anbieten</h3>
+        <p class="small">Ein Preis für die Tombola, Getränke oder etwas zu essen für den Eventtag? Sag uns kurz, was du anbieten möchtest. Wir melden uns bei dir und klären alles Weitere.</p>
+        <form class="form" id="sach-form">
+          <div class="chips" role="group" aria-label="Was möchtest du spenden?"><button type="button" class="chip pick sach-pick" aria-pressed="false">Tombola-Preis</button><button type="button" class="chip pick sach-pick" aria-pressed="false">Gutschein</button><button type="button" class="chip pick sach-pick" aria-pressed="false">Getränke</button><button type="button" class="chip pick sach-pick" aria-pressed="false">Essen oder Kuchen</button><button type="button" class="chip pick sach-pick" aria-pressed="false">Padel-Equipment</button><button type="button" class="chip pick sach-pick" aria-pressed="false">Sonstiges</button></div>
+          <div><label for="s-what">Was genau? (optional)</label><textarea id="s-what" rows="2" placeholder="z. B. 2 Kisten Wasser, Gutschein für ein Essen, Padelschläger …"></textarea></div>
+          <div><label for="s-name">Dein Name oder deine Firma</label><input id="s-name" autocomplete="organization"></div>
+          <button class="btn btn-primary" type="submit">Sachspende anbieten</button>
+          <p class="status" id="sach-status" aria-live="polite"></p>
+        </form>
+        <p class="note">Danke! Auf Wunsch nennen wir dich bei der Tombola oder auf Instagram.</p>
       </div>
       <div class="card gold" id="card-fan">
         <h3>📣 Fan sein</h3>
@@ -485,15 +498,27 @@ document.querySelectorAll('.path[data-target]').forEach(function(b){b.addEventLi
   var tiles=document.querySelectorAll('.path[data-target]');
   function select(id){
     tiles.forEach(function(t){var on=t.getAttribute('data-target')===id;t.classList.toggle('active',on);t.setAttribute('aria-pressed',on);});
-    ['card-mitspielen','card-helfen','card-fan'].forEach(function(c){var el=document.getElementById(c);if(el)el.classList.toggle('selected',c===id);});
+    ['card-mitspielen','card-helfen','card-sach','card-fan'].forEach(function(c){var el=document.getElementById(c);if(el)el.classList.toggle('selected',c===id);});
   }
   tiles.forEach(function(b){b.addEventListener('click',function(){select(b.getAttribute('data-target'));});});
-  document.querySelectorAll('.chip.pick').forEach(function(c){c.addEventListener('click',function(){
-    c.setAttribute('aria-pressed', c.getAttribute('aria-pressed')!=='true'); select('card-helfen');});});
+  document.querySelectorAll('#help-form .chip.pick, #sach-form .chip.pick').forEach(function(c){c.addEventListener('click',function(){
+    c.setAttribute('aria-pressed', c.getAttribute('aria-pressed')!=='true'); select(c.closest('#sach-form')?'card-sach':'card-helfen');});});
+  var sf=document.getElementById('sach-form');
+  if(sf) sf.addEventListener('submit',function(e){
+    e.preventDefault();
+    var picks=[].map.call(sf.querySelectorAll('.chip.pick[aria-pressed="true"]'),function(c){return '- '+c.textContent;});
+    var what=document.getElementById('s-what').value.trim(), name=document.getElementById('s-name').value.trim();
+    var body='Hallo Herzaufschlag-Team,\n\nich möchte eine Sachspende anbieten.\n\n'
+      +(picks.length?'Art:\n'+picks.join('\n')+'\n\n':'')
+      +(what?'Was genau:\n'+what+'\n\n':'')
+      +'Bitte meldet euch bei mir.\n\nViele Grüße'+(name?'\n'+name:'');
+    window.location.href='mailto:info@herzaufschlag.de?subject='+encodeURIComponent('Sachspende für Herzaufschlag'+(name?' – '+name:''))+'&body='+encodeURIComponent(body);
+    document.getElementById('sach-status').textContent='Dein Mail-Programm öffnet sich mit deinem Angebot. Einfach absenden, danke!';
+  });
   var f=document.getElementById('help-form'); if(!f) return;
   f.addEventListener('submit',function(e){
     e.preventDefault();
-    var picks=[].map.call(document.querySelectorAll('.chip.pick[aria-pressed="true"]'),function(c){return '- '+c.textContent;});
+    var picks=[].map.call(f.querySelectorAll('.chip.pick[aria-pressed="true"]'),function(c){return '- '+c.textContent;});
     var other=document.getElementById('h-other').value.trim(), name=document.getElementById('h-name').value.trim();
     var body='Hallo Herzaufschlag-Team,\n\nich möchte beim Eventtag helfen.\n\n'
       +(picks.length?'Am liebsten bei:\n'+picks.join('\n')+'\n\n':'')
