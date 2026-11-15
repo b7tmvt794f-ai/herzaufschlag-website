@@ -6,7 +6,17 @@
   var logo = document.querySelector('.logo');
   if (logo && !calm) {
     var seen = false; try { seen = sessionStorage.getItem('hza-intro') === '1'; } catch(e) {}
-    if (!seen) { logo.classList.add('intro'); try { sessionStorage.setItem('hza-intro','1'); } catch(e) {} }
+    var sky = document.querySelector('.skyline');
+    if (!seen) {
+      try { sessionStorage.setItem('hza-intro','1'); } catch(e) {}
+      if (sky) {
+        // Erst zeichnet sich die Skyline, danach fliegt der Ball ins Herz
+        var cn = document.querySelector('.city-name');
+        logo.classList.add('pre'); sky.classList.add('draw');
+        if (cn) { cn.classList.add('pre'); setTimeout(function(){ cn.classList.remove('pre'); cn.classList.add('show'); }, 1350); }
+        setTimeout(function(){ logo.classList.remove('pre'); logo.classList.add('intro'); }, cn ? 1950 : 1500);
+      } else logo.classList.add('intro');
+    }
     logo.addEventListener('click', function(){ logo.classList.remove('intro'); void logo.offsetWidth; logo.classList.add('intro'); });
   }
 

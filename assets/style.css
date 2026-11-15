@@ -198,7 +198,8 @@ html[data-dir="back"]::view-transition-new(page){animation-name:vtInBack}
 .impact div{background:var(--surface);border-radius:14px;padding:12px;display:flex;flex-direction:column;gap:4px;text-align:center}
 .impact b{font-family:var(--display);font-size:20px;color:var(--heart)}
 /* Social-Symbole im Header */
-header.top{flex-wrap:wrap}
+header.top{flex-wrap:nowrap}
+header.top .btn{flex:none}
 .social-top{display:flex;gap:2px;margin-left:auto;margin-right:4px}
 .social-top a{display:flex;align-items:center;justify-content:center;width:34px;height:34px;border-radius:50%;color:var(--ink);opacity:.8}
 .social-top a:hover{opacity:1;background:var(--heart-soft);color:var(--heart)}
@@ -295,3 +296,21 @@ header.top{flex-wrap:wrap}
 .hw-preview{display:flex;align-items:center;gap:10px;padding:12px 14px;border-radius:14px;background:var(--heart-soft,#F6DCD2);font-weight:700}
 .hw-heart.big{font-size:28px;color:var(--heart);animation:none;padding:0;cursor:default}
 @media (prefers-reduced-motion:reduce){.hw-heart{animation:none}.hw-dot{animation:none}}
+/* Stadt-Skyline im Header */
+.skyline{display:block;height:28px;width:auto;overflow:visible}
+.sk-line{fill:none;stroke:var(--heart);stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:1;stroke-dashoffset:0}
+.skyline.draw .sk-line{animation:skDraw 1.4s cubic-bezier(.45,.05,.3,1) both}
+.skyline.draw .sk-lantern{animation-delay:.75s;animation-duration:.4s}
+@keyframes skDraw{from{stroke-dashoffset:1}to{stroke-dashoffset:0}}
+.brand.city-a .skyline{height:32px}
+.brand.city-b{position:relative}
+.brand.city-b .skyline{position:absolute;left:36px;bottom:-6px;height:36px;opacity:.35;z-index:-1}
+.brand.city-b .sk-line{stroke-width:1.4}
+.logo.pre .hz-ball{opacity:0}
+@media (prefers-reduced-motion:reduce){.skyline.draw .sk-line{animation:none}}
+.city-name{margin-left:auto;margin-right:2px;font-family:var(--display);font-weight:700;font-size:15px;letter-spacing:-.2px;color:var(--ink);white-space:nowrap}
+.city-name.pre{opacity:0;transform:translateX(-8px)}
+.city-name.show{animation:cityIn .45s ease-out both}
+@keyframes cityIn{from{opacity:0;transform:translateX(-8px)}to{opacity:1;transform:none}}
+.brand.city-a{gap:6px;min-width:0}
+.brand.city-a .skyline{height:28px;flex:0 1 auto;min-width:0}
