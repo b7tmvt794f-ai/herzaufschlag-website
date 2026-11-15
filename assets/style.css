@@ -314,3 +314,24 @@ header.top .btn{flex:none}
 @keyframes cityIn{from{opacity:0;transform:translateX(-8px)}to{opacity:1;transform:none}}
 .brand.city-a{gap:6px;min-width:0}
 .brand.city-a .skyline{height:28px;flex:0 1 auto;min-width:0}
+.ring{position:relative}
+.ok-badge{position:absolute;right:-2px;bottom:-2px;width:20px;height:20px;border-radius:50%;background:#2E8B57;color:#fff;font-size:12px;font-weight:800;display:flex;align-items:center;justify-content:center;border:2px solid var(--bg)}
+.ok-text{color:#2E8B57;font-weight:700}
+.ring span.logo-in.pc{background:#1F1A17;display:flex;align-items:center;justify-content:center}
+.ring span.logo-in.pc span{color:#FBF7F0;font:700 10px/1.05 var(--display);text-align:center;text-transform:uppercase;letter-spacing:.04em}
+.pc-mini{display:flex;align-items:center;justify-content:center;width:42px;height:42px;background:#1F1A17;color:#FBF7F0;font:700 13px var(--display)}
+.interview{grid-column:1/-1;gap:12px}
+.interview .eyebrow{margin:0;font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--heart)}
+.interview h2{margin:0}
+.iv-video{position:relative;aspect-ratio:4/5;max-height:480px;border-radius:18px;overflow:hidden;background:radial-gradient(120% 90% at 50% 35%,#3a2f29 0%,#1F1A17 70%);display:flex;align-items:center;justify-content:center;color:#FBF7F0}
+.iv-play{width:68px;height:68px;border-radius:50%;background:var(--heart);display:flex;align-items:center;justify-content:center;box-shadow:0 8px 24px rgba(0,0,0,.35)}
+.iv-play svg{width:30px;height:30px;margin-left:4px}
+.iv-soon{position:absolute;top:12px;right:12px;font-size:11px;font-weight:700;background:rgba(251,247,240,.15);padding:4px 10px;border-radius:99px}
+.iv-name{position:absolute;left:16px;bottom:14px;display:flex;flex-direction:column}
+.iv-name b{font:700 20px var(--display)}
+.iv-name small{font-size:13px;opacity:.85}
+.iv-q{margin:0;padding-left:22px;display:flex;flex-direction:column;gap:6px;font-weight:600;font-size:15px}
+.iv-q li::marker{color:var(--heart);font-weight:800}
+.ring span.logo-in.pc span{background:transparent;width:auto;height:auto;border:0;box-shadow:none}
+.ring .ok-badge{width:20px;height:20px;padding:0;background:#2E8B57;border:2px solid var(--bg)}
+.ring span.ok-badge{color:#fff;font:800 11px/1 var(--display)}
