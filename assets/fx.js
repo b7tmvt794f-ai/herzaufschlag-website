@@ -94,3 +94,16 @@
   window.addEventListener('hashchange', function(){ setTimeout(update, 60); });
   update(); setTimeout(update, 400);
 })();
+
+/* Roter Faden: Linie zeichnet sich einmal, sobald die Grafik sichtbar ist */
+(function(){
+  if (window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  if (!('IntersectionObserver' in window)) return;
+  document.querySelectorAll('.faden').forEach(function(f){
+    f.classList.add('pre');
+    var io = new IntersectionObserver(function(en){ en.forEach(function(x){
+      if (x.isIntersecting) { io.disconnect(); requestAnimationFrame(function(){ f.classList.remove('pre'); f.classList.add('draw'); }); }
+    }); }, {threshold:.5});
+    io.observe(f);
+  });
+})();
