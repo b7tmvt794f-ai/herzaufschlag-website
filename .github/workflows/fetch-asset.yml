@@ -1,0 +1,36 @@
+name: Bild holen
+on:
+  workflow_dispatch:
+    inputs:
+      url:
+        description: "Bild-URL"
+        required: true
+      path:
+        description: "Zielpfad im Repo, z. B. assets/hero/court.jpg"
+        required: true
+permissions:
+  contents: write
+jobs:
+  fetch:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Download
+        env:
+          URL: ${{ inputs.url }}
+          DEST: ${{ inputs.path }}
+        run: |
+          case "$DEST" in assets/*) ;; *) echo "Nur unter assets/ erlaubt"; exit 1;; esac
+          case "$URL" in https://*) ;; *) echo "Nur https"; exit 1;; esac
+          mkdir -p "$(dirname "$DEST")"
+          curl -fsSL --max-filesize 15000000 -o "$DEST" "$URL"
+          file "$DEST"
+      - name: Commit
+        env:
+          DEST: ${{ inputs.path }}
+        run: |
+          git config user.name "github-actions"
+          git config user.email "github-actions@users.noreply.github.com"
+          git add "$DEST"
+          git commit -m "Bild geholt: $DEST" || exit 0
+          git push
