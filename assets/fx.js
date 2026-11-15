@@ -47,3 +47,28 @@
     });
   });
 })();
+
+/* Scroll-Zoom fuer Fotos: Bild zoomt beim Reinscrollen sanft heraus */
+(function(){
+  if (window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  var els = [].slice.call(document.querySelectorAll('.zoom-photo'));
+  if (!els.length) return;
+  var ticking = false;
+  function update(){
+    ticking = false;
+    var vh = window.innerHeight;
+    els.forEach(function(el){
+      var r = el.getBoundingClientRect();
+      if (r.bottom < 0 || r.top > vh || r.height === 0) return;
+      var p = (vh - r.top) / (vh + r.height);          /* 0 unten rein, 1 oben raus */
+      p = Math.max(0, Math.min(1, p));
+      var z = 1.22 - 0.22 * Math.min(1, p * 1.6) + 0.06 * Math.max(0, p - 0.62) / 0.38;
+      el.style.setProperty('--z', z.toFixed(4));
+    });
+  }
+  function onScroll(){ if (!ticking){ ticking = true; requestAnimationFrame(update); } }
+  window.addEventListener('scroll', onScroll, {passive:true});
+  window.addEventListener('resize', onScroll);
+  window.addEventListener('hashchange', function(){ setTimeout(update, 60); });
+  update(); setTimeout(update, 400);
+})();
