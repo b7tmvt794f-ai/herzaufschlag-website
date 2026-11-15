@@ -230,3 +230,19 @@ header.top{flex-wrap:wrap}
 .zoom-photo figcaption span{font-size:14px;opacity:.9}
 .zoom-photo .ki-hint{position:absolute;top:10px;right:12px;font-size:10px;color:#FBF7F0;background:rgba(31,26,23,.45);padding:3px 8px;border-radius:99px}
 @media (prefers-reduced-motion:reduce){.zoom-frame img{transform:none!important;transition:none}}
+.mission{grid-column:1/-1;color:#FBF7F0}
+.mission .zoom-frame{aspect-ratio:auto;position:absolute;inset:0}
+.mission .zoom-frame img{transform-origin:50% 70%}
+.mission::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(31,26,23,.88) 0%,rgba(31,26,23,.62) 48%,rgba(31,26,23,.25) 75%,rgba(31,26,23,.55) 100%);pointer-events:none}
+.mission-in{position:relative;z-index:1;padding:30px 22px 26px;min-height:560px;display:flex;flex-direction:column;gap:16px}
+.mission .eyebrow{margin:0;font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:#D9A62E}
+.mission h2{margin:0;font:700 30px/1.12 var(--display);letter-spacing:-.02em;color:#FBF7F0}
+.mission-facts{list-style:none;margin:6px 0 0;padding:0;display:grid;gap:10px}
+.mission-facts li{display:flex;align-items:baseline;gap:12px}
+.mission-facts b{font:700 20px var(--display);color:#D9A62E;min-width:96px}
+.mission-facts span{font-size:15px;opacity:.95}
+.mission .actions{margin-top:auto}
+.btn-light{background:#FBF7F0;color:#1F1A17}
+.btn-outline-light{background:transparent;color:#FBF7F0;border:1.5px solid rgba(251,247,240,.7)}
+.mission .ki-hint{z-index:2}
+@media(min-width:760px){.mission-in{min-height:520px;padding:44px 40px;max-width:560px}.mission h2{font-size:38px}}
