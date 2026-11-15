@@ -5,10 +5,11 @@
   // 1) Logo-Intro: Ball fliegt ins Herz, Herz schlägt einmal (einmal pro Sitzung)
   var logo = document.querySelector('.logo');
   if (logo && !calm) {
-    var seen = false; try { seen = sessionStorage.getItem('hza-intro') === '1'; } catch(e) {}
+    var introKey = 'hza-intro:' + location.pathname.replace(/index\.html$/, '');
+    var seen = false; try { seen = sessionStorage.getItem(introKey) === '1'; } catch(e) {}
     var sky = document.querySelector('.skyline');
     if (!seen) {
-      try { sessionStorage.setItem('hza-intro','1'); } catch(e) {}
+      try { sessionStorage.setItem(introKey,'1'); } catch(e) {}
       if (sky) {
         // Erst zeichnet sich die Skyline, danach fliegt der Ball ins Herz
         var cn = document.querySelector('.city-name');
