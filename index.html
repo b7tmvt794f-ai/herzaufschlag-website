@@ -74,6 +74,30 @@
       </ul>
     </div>
 
+    <div class="card wide partner" id="partner">
+      <h2>Partner werden</h2>
+      <p class="small muted">Für Unternehmen, Vereine und Anlagen. Unterstützt eine Stadt oder die ganze Reihe.</p>
+      <div class="partner-paths">
+        <div class="partner-path">
+          <h3>Für eine Stadt</h3>
+          <p class="small muted">Logo vor Ort, Court-Patenschaft, Firmen-Cup. Das Geld bleibt beim Verein der Stadt.</p>
+          <label for="city-pick">Welche Stadt wollt ihr unterstützen?</label>
+          <div class="city-pick">
+            <select id="city-pick">
+              <option value="hannover/#sponsor">Hannover 2027</option>
+              <option value="mailto:info@herzaufschlag.de?subject=Herzaufschlag%20in%20unserer%20Stadt">Unsere Stadt fehlt</option>
+            </select>
+            <a class="btn btn-primary btn-sm" id="city-go" href="hannover/#sponsor">Weiter</a>
+          </div>
+        </div>
+        <div class="partner-path">
+          <h3>Für alle Städte</h3>
+          <p class="small muted">Als Dach-Partner seid ihr bei jedem Herzaufschlag dabei, in Hannover und in jeder Stadt, die folgt.</p>
+          <a class="btn btn-ghost btn-sm" href="mailto:info@herzaufschlag.de?subject=Dach-Partner%20Herzaufschlag">Dach-Partner werden</a>
+        </div>
+      </div>
+    </div>
+
     <div class="card gold patrons wide">
       <h2>Schirmherrschaft gesucht</h2>
       <p class="small">Zwei bis drei Gesichter aus Hannover sollen Herzaufschlag ihren Namen und ihre Stimme leihen. Noch sind die Plätze frei.</p>
@@ -97,6 +121,12 @@
     <a href="datenschutz.html">Datenschutz</a>
   </footer>
 </div>
+<script>
+(function(){
+  var sel=document.getElementById('city-pick'), go=document.getElementById('city-go');
+  if(sel&&go) sel.addEventListener('change',function(){ go.href=sel.value; });
+})();
+</script>
 <script src="assets/fx.js?v=202611151402" defer></script>
 <div id="toast" class="toast" role="status" aria-live="polite"></div>
 </body>
