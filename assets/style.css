@@ -336,3 +336,5 @@ header.top .btn{flex:none}
 .ring span.logo-in.pc span{background:transparent;width:auto;height:auto;border:0;box-shadow:none}
 .ring .ok-badge{width:20px;height:20px;padding:0;background:#2E8B57;border:2px solid var(--bg)}
 .ring span.ok-badge{color:#fff;font:800 11px/1 var(--display)}
+.ring span.logo-in.tkh{background:#1F4E8C;display:flex;align-items:center;justify-content:center}
+.ring span.logo-in.tkh span{background:transparent;width:auto;height:auto;border:0;color:#fff;font:800 15px var(--display);letter-spacing:.04em}
