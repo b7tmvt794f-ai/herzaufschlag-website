@@ -24,7 +24,7 @@
 <meta property="og:image:height" content="630">
 <meta property="og:locale" content="de_DE">
 <meta name="twitter:card" content="summary_large_image">
-<link rel="stylesheet" href="../assets/style.css?v=202611150955">
+<link rel="stylesheet" href="../assets/style.css?v=202611151019">
 </head>
 <body>
 <div class="app with-tabs">
@@ -147,6 +147,27 @@
         <span class="btn btn-primary btn-disabled" aria-disabled="true" style="align-self:flex-start">Spenden startet bald</span>
         <p class="note">Wir stimmen den Spendenweg gerade mit dem Verein ab. Sobald es losgeht, kannst du hier direkt spenden.</p>
       </div>
+      <div class="card herzwand-card">
+        <div class="hw-head"><h3>Die Herzwand</h3><small class="bm-tag">Vorschau mit Beispielen</small></div>
+        <p class="small">Jede Spende wird ein Herz. Wer mag, zeigt seinen Namen und einen Gruß. Ohne Beträge, ohne Rangliste.</p>
+        <p class="hw-ticker" aria-live="polite"><span class="hw-dot"></span><span id="hw-tick">Gerade eben: Dieter F. 🎾 Für die Kids! 💪</span></p>
+        <div class="hw-wall" id="hw-wall" role="list" aria-label="Herzwand"></div>
+        <p class="hw-detail" id="hw-detail">Tipp ein Herz an.</p>
+
+        <details class="hw-try">
+          <summary>So erscheinst du auf der Herzwand</summary>
+          <div class="hw-form">
+            <label class="hw-switch"><input type="checkbox" id="hw-show"> Meinen Namen zeigen</label>
+            <div class="hw-row" id="hw-name-row" hidden><label for="hw-name">Vorname und Initial</label><input id="hw-name" maxlength="20" placeholder="z. B. Dieter F."></div>
+            <div class="hw-row"><span class="hw-lbl">Gruß</span><div class="hw-chips" id="hw-msgs"></div></div>
+            <div class="hw-row" id="hw-ort-row" hidden><label for="hw-ort">Stadtteil</label><select id="hw-ort"></select></div>
+            <div class="hw-row"><span class="hw-lbl">Emoji</span><div class="hw-chips" id="hw-emos"></div></div>
+            <div class="hw-preview"><span class="hw-heart big">❤</span><span id="hw-prev">Anonym ❤️</span></div>
+            <p class="note">Nur zur Ansicht: Gespeichert wird hier nichts. Später wählst du das direkt beim Spenden.</p>
+          </div>
+        </details>
+      </div>
+
       <div class="card">
         <h3>Weitere Wege zu helfen</h3>
         <ul class="list">
@@ -467,6 +488,42 @@ document.querySelectorAll('.path[data-target]').forEach(function(b){b.addEventLi
 (function(){var g=document.querySelector('.amounts');if(!g)return;var inp=document.getElementById('amt-other');
 g.addEventListener('click',function(e){var b=e.target.closest('.amt');if(!b)return;g.querySelectorAll('.amt').forEach(function(x){x.setAttribute('aria-pressed',x===b?'true':'false');});
 inp.hidden=!b.classList.contains('other');if(!inp.hidden)inp.focus();});})();
+</script>
+<script>
+(function(){
+  var wall=document.getElementById('hw-wall'); if(!wall) return;
+  var calm=window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var MSG=['Viel Erfolg!','Für die Kids! 💪','Starke Sache!','Grüße aus …','Bin am Eventtag dabei!','Alles Liebe an die Familien ❤️'];
+  var EMO=['❤️','🎾','🫶','💪','🎉','🌈'];
+  var ORT=['Ahlem','Bemerode','Bothfeld','Buchholz','Döhren','Kirchrode','Kleefeld','Linden','List','Mitte','Nordstadt','Oststadt','Ricklingen','Südstadt','Vahrenwald','Waldheim','Wülfel','Zoo','Region Hannover'];
+  var DATA=[['Dieter F.','🎾','Für die Kids! 💪'],['Anonym','❤️','Grüße aus Linden'],['Sabine K.','🫶','Alles Liebe an die Familien ❤️'],['Anonym','🎉','Viel Erfolg!'],['Musterfirma GmbH','💪','Starke Sache!'],['Jonas & Mia','🌈','Bin am Eventtag dabei!'],['Anonym','❤️',''],['Petra L.','🎾','Grüße aus der List'],['Anonym','🫶','Für die Kids! 💪'],['Team Rückhand','🎉','Bin am Eventtag dabei!'],['Murat Y.','❤️','Viel Erfolg!'],['Anonym','🌈','Grüße aus der Südstadt'],['Lena B.','💪','Starke Sache!'],['Anonym','❤️','Alles Liebe an die Familien ❤️'],['Familie W.','🎾','Grüße aus Kleefeld'],['Anonym','🫶','']];
+  var COLORS=['#C94E24','#D9A62E','#E07A52','#B8431E','#E8B84A'];
+  function txt(d){return d[0]+' '+d[1]+(d[2]?' '+d[2]:'');}
+  var det=document.getElementById('hw-detail');
+  DATA.forEach(function(d,i){
+    var b=document.createElement('button'); b.type='button'; b.className='hw-heart'; b.setAttribute('role','listitem');
+    b.style.color=COLORS[i%COLORS.length]; b.textContent='❤'; b.setAttribute('aria-label',txt(d));
+    if(!calm) b.style.animationDelay=(i*60)+'ms';
+    b.addEventListener('click',function(){ wall.querySelectorAll('.hw-heart').forEach(function(x){x.classList.remove('on');}); b.classList.add('on'); det.textContent=txt(d); });
+    wall.appendChild(b);
+  });
+  var tick=document.getElementById('hw-tick'), k=0;
+  if(!calm) setInterval(function(){ k=(k+1)%DATA.length; tick.classList.remove('in'); void tick.offsetWidth; tick.textContent='Gerade eben: '+txt(DATA[k]); tick.classList.add('in'); },3200);
+  // Formular-Vorschau
+  var msg='', emo='❤️';
+  function chips(el,arr,cb,sel){ arr.forEach(function(v){ var c=document.createElement('button'); c.type='button'; c.className='chip pick'; c.textContent=v; c.setAttribute('aria-pressed',v===sel?'true':'false');
+    c.addEventListener('click',function(){ var on=c.getAttribute('aria-pressed')==='true'; el.querySelectorAll('.chip').forEach(function(x){x.setAttribute('aria-pressed','false');}); if(!on||el.id==='hw-emos'){c.setAttribute('aria-pressed','true'); cb(v);} else cb(''); }); el.appendChild(c); }); }
+  var ortSel=document.getElementById('hw-ort'); ORT.forEach(function(o){ var op=document.createElement('option'); op.textContent=o; ortSel.appendChild(op); });
+  function upd(){ var show=document.getElementById('hw-show').checked, n=document.getElementById('hw-name').value.trim();
+    document.getElementById('hw-name-row').hidden=!show; document.getElementById('hw-ort-row').hidden=msg!=='Grüße aus …';
+    var o=ortSel.value, art=/^(List|Südstadt|Nordstadt|Oststadt|Region Hannover)$/.test(o)?'der ':'';
+    var m=msg==='Grüße aus …'?'Grüße aus '+art+o:msg;
+    document.getElementById('hw-prev').textContent=((show&&n)?n:'Anonym')+' '+emo+(m?' '+m:''); }
+  chips(document.getElementById('hw-msgs'),MSG,function(v){msg=v;upd();},'');
+  chips(document.getElementById('hw-emos'),EMO,function(v){emo=v;upd();},'❤️');
+  ['hw-show','hw-name','hw-ort'].forEach(function(id){ var e=document.getElementById(id); e.addEventListener('input',upd); e.addEventListener('change',upd); });
+  upd();
+})();
 </script>
 </body>
 </html>

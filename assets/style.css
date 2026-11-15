@@ -272,3 +272,26 @@ header.top{flex-wrap:wrap}
 .amt.other{font-weight:600;font-size:14px}
 .amt[aria-pressed="true"]{background:var(--heart);border-color:var(--heart);color:#fff}
 .amt-input{font:inherit;font-size:16px;padding:10px 14px;border-radius:12px;border:1.5px solid var(--line);background:var(--bg);max-width:200px}
+.hw-head{display:flex;align-items:center;justify-content:space-between;gap:8px}
+.hw-ticker{display:flex;align-items:center;gap:8px;margin:2px 0;padding:8px 12px;border-radius:999px;background:var(--bg);font-size:13px;font-weight:600;overflow:hidden;white-space:nowrap}
+.hw-ticker #hw-tick{overflow:hidden;text-overflow:ellipsis}
+.hw-ticker #hw-tick.in{animation:hwIn .4s ease-out}
+@keyframes hwIn{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+.hw-dot{flex:none;width:8px;height:8px;border-radius:50%;background:var(--heart);animation:hwPulse 1.6s infinite}
+@keyframes hwPulse{0%,100%{opacity:1}50%{opacity:.3}}
+.hw-wall{display:grid;grid-template-columns:repeat(8,1fr);gap:4px;padding:10px;border-radius:16px;background:var(--bg)}
+.hw-heart{font-size:26px;line-height:1;background:none;border:0;padding:4px 0;cursor:pointer;-webkit-tap-highlight-color:transparent;animation:hwPop .45s cubic-bezier(.3,1.6,.5,1) both;transition:transform .15s}
+.hw-heart.on{transform:scale(1.35)}
+@keyframes hwPop{from{transform:scale(0)}to{transform:scale(1)}}
+.hw-detail{margin:0;min-height:20px;font-size:14px;font-weight:600;text-align:center}
+.hw-try summary{cursor:pointer;font-weight:600;font-size:14px;color:var(--heart);padding:6px 0}
+.hw-form{display:flex;flex-direction:column;gap:12px;margin-top:8px}
+.hw-switch{display:flex;align-items:center;gap:10px;font-size:15px;font-weight:600}
+.hw-switch input{width:20px;height:20px;accent-color:var(--heart)}
+.hw-row{display:flex;flex-direction:column;gap:6px}
+.hw-lbl,.hw-row label{font-size:13px;font-weight:600;color:var(--muted)}
+.hw-row input,.hw-row select{font:inherit;font-size:16px;padding:9px 12px;border-radius:12px;border:1.5px solid var(--line);background:var(--bg)}
+.hw-chips{display:flex;flex-wrap:wrap;gap:6px}
+.hw-preview{display:flex;align-items:center;gap:10px;padding:12px 14px;border-radius:14px;background:var(--heart-soft,#F6DCD2);font-weight:700}
+.hw-heart.big{font-size:28px;color:var(--heart);animation:none;padding:0;cursor:default}
+@media (prefers-reduced-motion:reduce){.hw-heart{animation:none}.hw-dot{animation:none}}
