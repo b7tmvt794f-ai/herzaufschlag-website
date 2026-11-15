@@ -24,7 +24,7 @@
 <meta property="og:image:height" content="630">
 <meta property="og:locale" content="de_DE">
 <meta name="twitter:card" content="summary_large_image">
-<link rel="stylesheet" href="../assets/style.css?v=202611150907">
+<link rel="stylesheet" href="../assets/style.css?v=202611150915">
 </head>
 <body>
 <div class="app with-tabs">
@@ -93,11 +93,11 @@
 
       <div class="card gold">
         <h3>Spendenstand</h3>
-        <div class="barometer" data-pct="0" data-preview="true">
+        <div class="barometer" id="spendenherz" data-pct="0" data-preview="true">
           <svg viewBox="0 0 120 112" aria-hidden="true"><defs><clipPath id="bmclip"><path d="M60 104 C 47 95, 10 70, 10 38 C 10 20, 23 9, 37 9 C 48 9, 56 16, 60 26 C 64 16, 72 9, 83 9 C 97 9, 110 20, 110 38 C 110 70, 73 95, 60 104 Z"/></clipPath></defs>
-            <g clip-path="url(#bmclip)"><rect class="bm-bg" x="0" y="0" width="120" height="112"/><rect class="bm-fill" x="0" y="112" width="120" height="112"/></g>
+            <g clip-path="url(#bmclip)"><rect class="bm-bg" x="0" y="0" width="120" height="112"/><g class="bm-liquid" transform="translate(0,118)"><path class="bm-wave" d="M-120 6 Q -90 0 -60 6 T 0 6 T 60 6 T 120 6 T 180 6 T 240 6 V 140 H -120 Z"/></g></g>
             <path d="M60 104 C 47 95, 10 70, 10 38 C 10 20, 23 9, 37 9 C 48 9, 56 16, 60 26 C 64 16, 72 9, 83 9 C 97 9, 110 20, 110 38 C 110 70, 73 95, 60 104 Z" fill="none" stroke="var(--heart)" stroke-width="6" stroke-linejoin="round"/></svg>
-          <div class="bm-text"><b class="bm-pct">Vorschau</b><span class="small muted">So füllt sich unser Herz mit euren Spenden. Der echte Zähler startet mit der Anmeldung, bis dahin geht jede Spende direkt an den Verein.</span></div>
+          <div class="bm-text"><b class="bm-pct">Vorschau</b><small class="bm-tag">Beispiel</small><span class="small muted">So füllt sich unser Herz mit euren Spenden. Der echte Zähler startet mit der Anmeldung, bis dahin geht jede Spende direkt an den Verein.</span></div>
         </div>
       </div>
 
@@ -452,7 +452,7 @@ document.querySelectorAll('.path[data-target]').forEach(function(b){b.addEventLi
   });
 })();
 </script>
-<script src="../assets/fx.js?v=202611150218" defer></script>
+<script src="../assets/fx.js?v=202611150915" defer></script>
 <div id="toast" class="toast" role="status" aria-live="polite"></div>
 </body>
 </html>
