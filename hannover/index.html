@@ -263,7 +263,7 @@
       <h2 id="h-mitmachen">Mitmachen</h2>
       <p class="muted">Drei Wege, dabei zu sein. Such dir einen aus, oder alle drei.</p>
       <div class="paths">
-        <button type="button" class="path" data-target="card-mitspielen"><span class="dot">🎾</span><b>Mitspielen</b><small>Turnier, Firmen-Cup, Bring a Beginner</small></button>
+        <button type="button" class="path" data-target="card-mitspielen"><span class="dot">🎾</span><b>Mitspielen</b><small>Turnier, Firmen- &amp; Vereins-Cup, Bring a Beginner</small></button>
         <button type="button" class="path" data-target="card-helfen"><span class="dot">🤝</span><b>Helfen</b><small>Stand, Aufbau, Fotos, Kuchen</small></button>
         <button type="button" class="path" data-target="card-fan"><span class="dot">📣</span><b>Fan sein</b><small>Zuschauen, anfeuern, weitersagen</small></button>
       </div>
@@ -274,7 +274,8 @@
           <div><label for="n-name">Name</label><input id="n-name" autocomplete="name"></div>
           <div><label for="n-mail">E-Mail</label><input id="n-mail" type="email" autocomplete="email" required></div>
           <div><label for="n-role">Ich möchte</label>
-            <select id="n-role"><option>mitspielen</option><option>helfen</option><option>als Firma ein Team stellen</option><option>eine Anlage oder Station beisteuern</option></select></div>
+            <select id="n-role"><option>mitspielen</option><option>mit meiner Firma ein Team stellen</option><option>mit meinem Verein ein Team stellen</option><option>helfen</option><option>eine Anlage oder Station beisteuern</option></select></div>
+          <div id="n-org-wrap" hidden><label for="n-org">Name der Firma oder des Vereins</label><input id="n-org" autocomplete="organization" placeholder="z. B. TSV Musterstadt oder Musterfirma GmbH"></div>
           <button class="btn btn-primary" type="submit">Per Mail eintragen</button>
           <p class="status" id="notify-status" aria-live="polite"></p>
         </form>
@@ -395,10 +396,13 @@
   }
   count();
 
+  (function(){var sel=document.getElementById('n-role'),w=document.getElementById('n-org-wrap');if(!sel||!w)return;
+    function t(){w.hidden=!/Team/.test(sel.value);} sel.addEventListener('change',t); t();})();
   document.getElementById('notify').addEventListener('submit', function(e){
     e.preventDefault();
     var n=document.getElementById('n-name').value.trim(), m=document.getElementById('n-mail').value.trim(), r=document.getElementById('n-role').value;
-    var body='Hallo Herzaufschlag-Team,\n\nich möchte '+r+'.\n\nName: '+n+'\nE-Mail: '+m+'\n\nBitte meldet euch, wenn es losgeht.';
+    var o=(document.getElementById('n-org')||{}).value; o=o?o.trim():''; var team=/Team/.test(r);
+    var body='Hallo Herzaufschlag-Team,\n\nich möchte '+r+'.\n\nName: '+n+'\nE-Mail: '+m+(team&&o?'\n'+(/Verein/.test(r)?'Verein':'Firma')+': '+o:'')+'\n\nBitte meldet euch, wenn es losgeht.';
     window.location.href='mailto:info@herzaufschlag.de?subject='+encodeURIComponent('Herzaufschlag: Ich möchte '+r)+'&body='+encodeURIComponent(body);
     document.getElementById('notify-status').textContent='Dein Mail-Programm öffnet sich mit einer fertigen Nachricht. Einfach absenden, fertig.';
   });
