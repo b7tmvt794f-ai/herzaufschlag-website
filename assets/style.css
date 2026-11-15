@@ -370,3 +370,27 @@ header.top .btn{flex:none}
 .faden.draw .st{transition:opacity .5s ease-out var(--d)}
 .faden.draw .heart{animation:beat .5s ease-out 2.9s both}
 @media (prefers-reduced-motion:reduce){.faden.pre .thread{stroke-dashoffset:0}.faden.pre .st{opacity:1}}
+
+/* Roter Faden (wachsend) */
+.faden[data-live] .thread{stroke-dasharray:none}
+.faden[data-live] .st{opacity:0;transform:translateY(6px);transition:opacity .45s ease-out,transform .45s ease-out}
+.faden[data-live] .st.on{opacity:1;transform:none}
+.faden[data-live] .st.heart.on{animation:beat .5s ease-out .2s both}
+.faden[data-live] .st path,.faden[data-live] .st circle{vector-effect:non-scaling-stroke;stroke-width:2.5}
+.faden[data-live] .st.heart path{vector-effect:none;stroke-width:10}
+.faden[data-live] text{font:500 24px var(--body)}
+.faden[data-live] .disc{fill:#fff;stroke:none}
+.faden[data-live] .disc.dark{fill:#1F1A17}
+.faden[data-live] .rim{fill:none;stroke:var(--gold);stroke-width:4}
+.faden[data-live] .st-anlage circle.rim,.faden[data-live] .st-partner circle.rim{stroke:var(--heart)}
+.faden[data-live] text.in{font:700 20px var(--display);fill:#F5F5F4}
+.faden[data-live] .ok{fill:#3F8F5A;stroke:var(--surface);stroke-width:3}
+.faden[data-live] .okv{stroke:#fff;stroke-width:3;fill:none}
+.faden[data-live] .play{fill:#fff;stroke:none;opacity:.9}
+.faden[data-live] .dash{stroke-dasharray:6 6;stroke:var(--muted)}
+.faden[data-live] .st-link{cursor:pointer}
+.faden-video{padding:0;border:0;background:#000;border-radius:16px;max-width:min(92vw,420px)}
+.faden-video::backdrop{background:rgba(0,0,0,.7)}
+.faden-video video{display:block;width:100%;max-height:85vh}
+.faden-video button{position:absolute;top:8px;right:8px;width:40px;height:40px;border-radius:50%;border:0;background:rgba(0,0,0,.5);color:#fff;font-size:24px;cursor:pointer}
+@media (prefers-reduced-motion:reduce){.faden[data-live] .st{opacity:1;transform:none}}
