@@ -9,7 +9,7 @@ Website für **Herzaufschlag**, das Charity-Padel-Event für krebskranke Kinder.
 - `impressum.html`, `datenschutz.html` – Vorlagen, vor dem Livegang vervollständigen
 
 ## Neue Stadt hinzufügen
-Ordner `hannover/` kopieren, umbenennen (z. B. `koeln/`), Inhalte anpassen und auf der Startseite in der Städteliste verlinken.
+Ordner `hannover/` kopieren, umbenennen (z. B. `koeln/`), Inhalte anpassen und auf der Startseite in der Städteliste und in der Stadtauswahl unter „Partner werden“ verlinken (`koeln/#sponsor` führt direkt zu den Sponsor-Paketen).
 
 ## Offen vor dem Livegang
 - Impressum und Datenschutz ausfüllen

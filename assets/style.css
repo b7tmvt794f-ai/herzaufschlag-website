@@ -344,3 +344,11 @@ header.top .btn{flex:none}
   .zoom-frame{aspect-ratio:16/9}
 }
 .ico{display:block;flex:none}
+/* Partner werden (Startseite) */
+.partner-paths{display:grid;gap:12px}
+.partner-path{display:flex;flex-direction:column;gap:8px;padding:16px;border-radius:12px;background:var(--bg)}
+.partner-path .btn{align-self:flex-start}
+.city-pick{display:flex;gap:8px}
+.city-pick select{flex:1;min-width:0}
+#card-sponsor{scroll-margin-top:72px}
+@media (min-width:760px){.partner-paths{grid-template-columns:1fr 1fr}}
