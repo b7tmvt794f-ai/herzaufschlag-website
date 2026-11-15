@@ -8,7 +8,8 @@
     var introKey = 'hza-intro:' + location.pathname.replace(/index\.html$/, '');
     var seen = false; try { seen = sessionStorage.getItem(introKey) === '1'; } catch(e) {}
     var sky = document.querySelector('.skyline');
-    if (!seen) {
+    // Stadtseiten (mit Skyline) zeigen das Intro bei jedem Öffnen, die Startseite einmal pro Sitzung
+    if (sky || !seen) {
       try { sessionStorage.setItem(introKey,'1'); } catch(e) {}
       if (sky) {
         // Erst zeichnet sich die Skyline, danach fliegt der Ball ins Herz
