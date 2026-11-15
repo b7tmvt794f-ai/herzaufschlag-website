@@ -219,3 +219,6 @@ header.top{flex-wrap:wrap}
 .v-head{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:2px}
 .v-logo{flex:none;height:42px;width:auto;border-radius:8px;box-shadow:0 1px 3px rgba(31,26,23,.15)}
 .v-logo.round{height:44px;border-radius:50%}
+.ring span.logo-in{overflow:hidden;padding:0}
+.ring span.logo-in img{width:100%;height:100%;object-fit:cover;border-radius:50%;display:block}
+.ring span.logo-in.dark{background:#141210}
