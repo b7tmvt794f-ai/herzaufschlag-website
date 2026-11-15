@@ -352,3 +352,21 @@ header.top .btn{flex:none}
 .city-pick select{flex:1;min-width:0}
 #card-sponsor{scroll-margin-top:72px}
 @media (min-width:760px){.partner-paths{grid-template-columns:1fr 1fr}}
+/* Roter Faden (Hannover): gezeichnete Linie durch die Stadt */
+.faden{grid-column:1/-1;margin:0;padding:20px 16px;border-radius:16px;background:var(--surface);border:1px solid var(--line);display:flex;flex-direction:column;gap:12px}
+.faden svg{display:block;width:100%;max-width:640px;height:auto;margin:0 auto;overflow:visible}
+.faden .thread{fill:none;stroke:var(--heart);stroke-width:4;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:1;stroke-dashoffset:0}
+.faden .st path,.faden .st rect,.faden .st circle{fill:none;stroke:var(--heart);stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.faden .heart path{stroke-width:10}
+.faden .st .ball{fill:var(--gold);stroke:none}
+.faden text{font:500 22px var(--body);fill:var(--ink);text-anchor:middle}
+.faden figcaption{display:flex;flex-direction:column;gap:4px;text-align:center}
+.faden figcaption b{font:600 22px var(--display)}
+.faden figcaption span{font-size:15px;color:var(--muted)}
+.faden .st{transform-box:fill-box;transform-origin:center}
+.faden.pre .thread{stroke-dashoffset:1}
+.faden.pre .st{opacity:0}
+.faden.draw .thread{transition:stroke-dashoffset 2.6s cubic-bezier(.45,.05,.3,1)}
+.faden.draw .st{transition:opacity .5s ease-out var(--d)}
+.faden.draw .heart{animation:beat .5s ease-out 2.9s both}
+@media (prefers-reduced-motion:reduce){.faden.pre .thread{stroke-dashoffset:0}.faden.pre .st{opacity:1}}
