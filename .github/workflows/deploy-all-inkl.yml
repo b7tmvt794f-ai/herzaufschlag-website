@@ -46,7 +46,7 @@ jobs:
             open -u \"$FTP_USERNAME\" --env-password \"$FTP_SERVER\";
             mirror --reverse --verbose --parallel=2 \
               --exclude-glob .git* --exclude-glob .git/ --exclude-glob .github/ \
-              --exclude-glob README.md --exclude-glob .nojekyll \
+              --exclude-glob README.md --exclude-glob .nojekyll --exclude-glob _daten/ \
               ./ ./;
             bye
           "

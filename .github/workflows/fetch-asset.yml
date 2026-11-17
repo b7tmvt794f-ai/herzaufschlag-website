@@ -20,10 +20,10 @@ jobs:
           URL: ${{ inputs.url }}
           DEST: ${{ inputs.path }}
         run: |
-          case "$DEST" in assets/*) ;; *) echo "Nur unter assets/ erlaubt"; exit 1;; esac
+          case "$DEST" in assets/*|_daten/*) ;; *) echo "Nur unter assets/ oder _daten/ erlaubt"; exit 1;; esac
           case "$URL" in https://*) ;; *) echo "Nur https"; exit 1;; esac
           mkdir -p "$(dirname "$DEST")"
-          curl -fsSL --max-filesize 15000000 -o "$DEST" "$URL"
+          curl -fsSL --max-filesize 80000000 --max-time 300 -o "$DEST" "$URL"
           file "$DEST"
       - name: Commit
         env:
