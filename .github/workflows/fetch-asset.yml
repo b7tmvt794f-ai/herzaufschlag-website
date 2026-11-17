@@ -23,7 +23,7 @@ jobs:
           case "$DEST" in assets/*|_daten/*) ;; *) echo "Nur unter assets/ oder _daten/ erlaubt"; exit 1;; esac
           case "$URL" in https://*) ;; *) echo "Nur https"; exit 1;; esac
           mkdir -p "$(dirname "$DEST")"
-          curl -fsSL --max-filesize 80000000 --max-time 300 -o "$DEST" "$URL"
+          curl -fsSL -A "Herzaufschlag-Website/1.0 (info@herzaufschlag.de)" -H "Accept: */*" --max-filesize 80000000 --max-time 300 -o "$DEST" "$URL"
           file "$DEST"
       - name: Commit
         env:
