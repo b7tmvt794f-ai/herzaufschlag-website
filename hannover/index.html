@@ -204,9 +204,11 @@
           <li class="row"><span class="dot">€</span><div><b>Startgeld</b><p class="muted small">Wer mitspielt, unterstützt mit dem Startgeld den Verein.</p></div></li>
           <li class="row"><span class="dot"><svg class="ico" aria-hidden="true"><use href="#i-heart"/></svg></span><div><b>Vor Ort spenden</b><p class="muted small">Spendenboxen auf allen Anlagen, Tombola und Versteigerung.</p></div></li>
           <li class="row"><span class="dot">M</span><div><b>Merch kaufen</b><p class="muted small">Der Erlös aus Shirts, Bällen und Tassen geht an den Verein.</p></div></li>
+          <li class="row"><span class="dot"><svg class="ico" aria-hidden="true"><use href="#i-gift"/></svg></span><div><b>Sachspende</b><p class="muted small">Ein Preis für die Tombola oder Equipment? In der Stadt Hannover holen wir ab, ab sofort.</p></div></li>
           <li class="row"><span class="dot">S</span><div><b>Sponsor werden</b><p class="muted small">Für Unternehmen: Court-Patenschaft, Firmen-Cup, Logo auf Shirts.</p></div></li>
         </ul>
         <div class="actions left">
+          <a class="btn btn-ghost" href="#sachspende">Sachspende anbieten</a>
           <a class="btn btn-ghost" href="#merch">Zum Merch</a>
           <a class="btn btn-ghost" href="#mitmachen">Sponsor werden</a>
         </div>
@@ -368,10 +370,20 @@
       </div>
       <div class="card" id="card-sach">
         <h3>Sachspende anbieten</h3>
-        <p class="small">Ein Preis für die Tombola, Getränke oder etwas zu essen für den Eventtag? Sag uns kurz, was du anbieten möchtest. Wir melden uns bei dir und klären alles Weitere.</p>
+        <p class="small">Ein Preis für die Tombola, Getränke oder etwas zu essen für den Eventtag? Sag uns kurz, was du anbieten möchtest. Wir melden uns bei dir und klären alles Weitere. Auf Wunsch holen wir es ab, schon ab jetzt.</p>
         <form class="form" id="sach-form">
           <div class="chips" role="group" aria-label="Was möchtest du spenden?"><button type="button" class="chip pick sach-pick" aria-pressed="false">Tombola-Preis</button><button type="button" class="chip pick sach-pick" aria-pressed="false">Gutschein</button><button type="button" class="chip pick sach-pick" aria-pressed="false">Getränke</button><button type="button" class="chip pick sach-pick" aria-pressed="false">Essen oder Kuchen</button><button type="button" class="chip pick sach-pick" aria-pressed="false">Padel-Equipment</button><button type="button" class="chip pick sach-pick" aria-pressed="false">Sonstiges</button></div>
           <div><label for="s-what">Was genau? (optional)</label><textarea id="s-what" rows="2" placeholder="z. B. 2 Kisten Wasser, Gutschein für ein Essen, Padelschläger …"></textarea></div>
+          <fieldset class="handover">
+            <legend>Wie kommt die Spende zu uns?</legend>
+            <label class="radio"><input type="radio" name="s-hand" value="bringen" checked> Ich bringe sie vorbei oder zum Eventtag mit</label>
+            <label class="radio"><input type="radio" name="s-hand" value="abholen"> Bitte abholen</label>
+          </fieldset>
+          <div class="pickup" id="s-pickup" hidden>
+            <div><label for="s-where">Stadtteil oder PLZ</label><input id="s-where" autocomplete="postal-code" placeholder="z. B. Linden oder 30449"></div>
+            <div><label for="s-when">Wann passt es? (optional)</label><input id="s-when" placeholder="z. B. noch im Dezember, abends"></div>
+            <p class="note">Wir holen ab sofort ab: in der Stadt Hannover immer, in der Region nach Absprache. Abholen können wir nur Haltbares, Essen und Kuchen bitte erst für den Eventtag anbieten. Die genaue Adresse klären wir, wenn wir uns melden.</p>
+          </div>
           <div><label for="s-name">Dein Name oder deine Firma</label><input id="s-name" autocomplete="organization"></div>
           <button class="btn btn-primary" type="submit">Sachspende anbieten</button>
           <p class="status" id="sach-status" aria-live="polite"></p>
@@ -427,7 +439,8 @@
   var views = ['start','spenden','programm','merch','mitmachen','partner'];
   function show(){
     var v = (location.hash || '#start').slice(1), target = null;
-    if (v === 'sponsor') { v = 'mitmachen'; target = 'card-sponsor'; }
+    var alias = { sponsor: 'card-sponsor', sachspende: 'card-sach' };
+    if (alias[v]) { target = alias[v]; v = 'mitmachen'; }
     if (views.indexOf(v) < 0) v = 'start';
     views.forEach(function(name){
       document.getElementById('view-' + name).classList.toggle('active', name === v);
@@ -520,13 +533,19 @@ document.querySelectorAll('.path[data-target]').forEach(function(b){b.addEventLi
   document.querySelectorAll('#help-form .chip.pick, #sach-form .chip.pick').forEach(function(c){c.addEventListener('click',function(){
     c.setAttribute('aria-pressed', c.getAttribute('aria-pressed')!=='true'); select(c.closest('#sach-form')?'card-sach':'card-helfen');});});
   var sf=document.getElementById('sach-form');
+  if(sf) sf.querySelectorAll('input[name="s-hand"]').forEach(function(rb){rb.addEventListener('change',function(){
+    document.getElementById('s-pickup').hidden=sf.querySelector('input[name="s-hand"]:checked').value!=='abholen';});});
   if(sf) sf.addEventListener('submit',function(e){
     e.preventDefault();
     var picks=[].map.call(sf.querySelectorAll('.chip.pick[aria-pressed="true"]'),function(c){return '- '+c.textContent;});
     var what=document.getElementById('s-what').value.trim(), name=document.getElementById('s-name').value.trim();
+    var pick=(sf.querySelector('input[name="s-hand"]:checked')||{}).value==='abholen';
+    var where=document.getElementById('s-where').value.trim(), when=document.getElementById('s-when').value.trim();
+    var hand=pick?'Übergabe: Bitte abholen'+(where?'\nStadtteil/PLZ: '+where:'')+(when?'\nWann: '+when:''):'Übergabe: Ich bringe die Spende vorbei oder zum Eventtag mit';
     var body='Hallo Herzaufschlag-Team,\n\nich möchte eine Sachspende anbieten.\n\n'
       +(picks.length?'Art:\n'+picks.join('\n')+'\n\n':'')
       +(what?'Was genau:\n'+what+'\n\n':'')
+      +hand+'\n\n'
       +'Bitte meldet euch bei mir.\n\nViele Grüße'+(name?'\n'+name:'');
     window.location.href='mailto:info@herzaufschlag.de?subject='+encodeURIComponent('Sachspende für Herzaufschlag'+(name?' – '+name:''))+'&body='+encodeURIComponent(body);
     document.getElementById('sach-status').textContent='Dein Mail-Programm öffnet sich mit deinem Angebot. Einfach absenden, danke!';

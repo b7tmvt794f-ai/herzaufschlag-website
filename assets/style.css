@@ -370,3 +370,11 @@ header.top .btn{flex:none}
 .faden.draw .st{transition:opacity .5s ease-out var(--d)}
 .faden.draw .heart{animation:beat .5s ease-out 2.9s both}
 @media (prefers-reduced-motion:reduce){.faden.pre .thread{stroke-dashoffset:0}.faden.pre .st{opacity:1}}
+/* Sachspende: Übergabe */
+.handover{border:0;margin:0;padding:0;display:flex;flex-direction:column;gap:8px}
+.handover legend{font-size:14px;font-weight:500;margin-bottom:4px;padding:0}
+.radio{display:flex;align-items:center;gap:8px;font-weight:400;font-size:15px}
+.radio input{width:20px;height:20px;min-height:0;accent-color:var(--heart);margin:0}
+.pickup{display:flex;flex-direction:column;gap:10px}
+.pickup[hidden]{display:none}
+#card-sach{scroll-margin-top:72px}
